@@ -1,17 +1,17 @@
 use std::io::{self, BufRead};
+use std::collections::HashSet;
 
 fn main() {
-    let mut numbers = Vec::new();
+    let mut numbers = HashSet::new();
     for line in io::stdin().lock().lines() {
-        numbers.push(line.unwrap().parse::<i32>().unwrap());
+        numbers.insert(line.unwrap().parse::<i32>().unwrap());
     }
 
-    'outer: for x in numbers.iter() {
-        for y in numbers.iter() {
-            if x + y == 2020 {
-                println!("{}", x * y);
-                break 'outer;
-            }
+    for num in numbers.iter() {
+        let candidate = 2020 - num;
+        if numbers.contains(&candidate) {
+            println!("{}", num * candidate);
+            break;
         }
     }
 }
