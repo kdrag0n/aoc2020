@@ -10,8 +10,8 @@ fn main() {
         nums_set.insert(num);
     }
 
-    'outer: for x in nums_vec.iter() {
-        for y in nums_vec.iter() {
+    'outer: for (xi, x) in nums_vec.iter().enumerate() {
+        for y in nums_vec.iter().skip(xi) {
             let candidate = 2020 - (x + y);
             if nums_set.contains(&candidate) {
                 println!("{}", x * y * candidate);
