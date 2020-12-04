@@ -15,6 +15,7 @@ imap = {}
 
 total = 0
 result = 0
+other = 0
 
 while True:
     for l in lines:
@@ -29,4 +30,4 @@ while True:
 
 print(f"Total: {total}")
 print(f"Result: {result}")
-print(f"2: {0}")
+print(f"Other: {other}")
