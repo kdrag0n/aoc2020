@@ -20,7 +20,6 @@ other = 0
 while True:
     fields = {}
     def val():
-        print(fields)
         for k in ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"]:
             if k not in fields:
                 return False
@@ -68,12 +67,10 @@ while True:
         if not l:
             if val():
                 total += 1
-            print('clrclrclrclrclrclrclrclrclr')
             fields = {}
             continue
         
-        print(l)
-        if sum(1 for c in l if c==":") > 1:
+        if l.count(":") > 1:
             for tk in l.split(" "):
                 print(tk)
                 k, v=tk.split(":")
