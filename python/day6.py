@@ -10,14 +10,20 @@ with open(sys.argv[1], "r") as f:
 
 
 
+ilist = []
+imap = {}
+
 total = 0
 result = 0
 
-for l in lines:
-    l1, l2 = l.split()
+while True:
+    for l in lines:
+        l1, l2 = l.split()
 
-    if False:
-        total += 1
+        if False:
+            total += 1
+
+    break
 
 
 
