@@ -65,6 +65,17 @@ while True:
 
     break
 
+miss=[]
+for r in range(128):
+    for c in range(8):
+        iri=r*8+c
+        if iri not in ilist:
+            miss.append(iri)
+            print("MIS", iri)
+
+for m in miss:
+    if m-1 in ilist and m+1 in ilist:
+        print("MMMM", m)
 print(f"Total: {total}")
 print(f"Result: {result}")
 print(f"Other: {max(ilist)}")
