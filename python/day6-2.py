@@ -20,17 +20,25 @@ other = 0
 
 while True:
     grps=[]
-    ans = set()
+    ans = []
     for l in lines:
         print(l)
         if not l:
-            grps.append(len(ans))
-            print(len(ans))
-            total+=len(ans)
-            ans=set()
+            if len(ans)<1:
+                ans=[set()]
+            v = ans[0]
+            for s in ans:
+                v = s.intersection(v)
+            v = len(v)
+            grps.append(v)
+            print(v)
+            total+=v
+            ans=[]
             continue
+        asd=set()
         for c in l:
-            ans.add(c)
+            asd.add(c)
+        ans+=[asd]
 
 
         if False:
