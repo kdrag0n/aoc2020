@@ -22,23 +22,15 @@ other = 0
 rules2 = {}
 rules = {}
 
-def add_rules2(col, dest):
+def add_rules2(col, dest, _qty=1):
     print(col, '->', dest)
     if dest not in rules2:
         rules2[dest] = {}
     for qty, subcol in rules[col]:
-        rules2[dest][subcol] = qty
-        add_rules2(subcol, dest)
-
-def search_rules2(col):
-    total = 0
-    for rootcol, crs in rules2.items():
-        for ccol, qty in crs.items():
-            print(rootcol, ':', ccol)
-            if ccol == col:
-                print('+')
-                total += 1
-    return total
+        if subcol not in rules2[dest]:
+            rules2[dest][subcol] = 0
+        rules2[dest][subcol] += _qty * qty
+        add_rules2(subcol, dest, _qty * qty)
 
 while True:
     for l in lines:
@@ -58,7 +50,8 @@ while True:
 
 
     sc = "shiny gold"
-    total = search_rules2(sc)
+    print(rules2[sc])
+    total = sum(rules2[sc].values())
     print(total)
 
     break
