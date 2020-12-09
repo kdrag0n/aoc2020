@@ -21,10 +21,10 @@ other = 0
 
 while True:
     for i, l in enumerate(lines):
-        print('eval', l)
+        #print('eval', l)
         if i < pa_len:
             continue
-        print('cand', lines[i-pa_len:i])
+        #print('cand', lines[i-pa_len:i])
         valid = False
         for vx in lines[i-pa_len:i]:
             for vy in lines[i-pa_len:i]:
@@ -40,8 +40,21 @@ while True:
         
         if not valid:
             print('nv', l)
-            exit(1)
+            nv = l
+            break
+    
+    srng = None
+    for i, vx in enumerate(lines):
+        for count in range(len(lines) - i):
+            rng = lines[i:i+count+1]
+            #print(rng, nv)
+            if sum(rng) == nv:
+                srng = rng
+                break
+        if srng:
+            break
 
+    print(min(srng) + max(srng))
     break
 
 

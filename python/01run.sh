@@ -4,7 +4,7 @@ set -eufo pipefail
 
 cd "$(dirname "$0")"
 
-num="$1"
+num="$(echo "$1" | tr -d 't')"
 problem="${2:-}"
 
 if [ ! -f in/$num ]; then
