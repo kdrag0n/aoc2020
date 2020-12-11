@@ -23,17 +23,30 @@ def simround():
     updates = []
     for y, row in enumerate(lines):
         for x, seat in enumerate(row):
-            adjs = [(x, y-1), (x, y+1), (x-1, y), (x+1, y),   (x+1, y+1), (x-1, y-1), (x+1, y-1), (x-1, y+1)]
+            
             occ = 0
-            for ax, ay in adjs:
-                if ax >= 0 and ax <= len(lines[0]) - 1 and ay >= 0 and ay <= len(lines) - 1:
-                    aocc = lines[ay][ax]
-                    if aocc == "#":
-                        occ += 1
+            dirs = [(0, 0-1), (0, 0+1), (0-1, 0), (0+1, 0),   (0+1, 0+1), (0-1, 0-1), (0+1, 0-1), (0-1, 0+1)]
+            for dx, dy in dirs:
+                found = False
+                incs = 1
+                while not found:
+                    ax = x + dx * incs
+                    ay = y + dy * incs
+                    
+                    if ax >= 0 and ax <= len(lines[0]) - 1 and ay >= 0 and ay <= len(lines) - 1:
+                        aocc = lines[ay][ax]
+                        if aocc != ".":
+                            found = True
+                        if aocc == "#":
+                            occ += 1
+                    else:
+                        found = True
+                    
+                    incs += 1
             
             if seat == "L" and occ == 0:
                 updates += [(x, y, "#")]
-            if seat == "#" and occ >= 4:
+            if seat == "#" and occ >= 5:
                 updates += [(x, y, "L")]
             
         #    if rounds > 0:
