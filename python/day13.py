@@ -18,11 +18,28 @@ result = 0
 other = 0
 
 while True:
-    for l in lines:
-        l1, l2 = l.split()
+    start = int(lines[0])
 
-        if False:
-            total += 1
+    minid = 1000000000000000000000000
+    mint = 10000000000000000000000
+    bust = []
+    for bus in lines[1].split(","):
+        if bus == "x":
+            continue
+        bus = int(bus)
+        minb = int(start / bus) - 1
+        for i in range(50):
+            t = bus * (minb + i)
+            if t <= mint and t >= start:
+                minid = bus
+                mint = t
+        rmn = start % bus
+        bust.append((bus, rmn))
+        print(f"{start} % {bus} = {rmn}")
+
+    print(min(bust, key=lambda b: b[1]))
+
+    print(minid, mint - start, minid *(mint-start))
 
     break
 
