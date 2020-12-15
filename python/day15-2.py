@@ -39,9 +39,11 @@ while True:
         else:
             num_occurs[num] = 1
         if num in num_turns:
-            num_turns[num] += [turn]
+            nt = num_turns[num]
+            nt[0] = nt[1]
+            nt[1] = turn
         else:
-            num_turns[num] = [turn]
+            num_turns[num] = [-1, turn]
 
     print()
     print(num)
