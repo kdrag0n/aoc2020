@@ -23,7 +23,7 @@ while True:
     num_occurs = {}
     num_turns = {}
     for turn in range(30000000):
-        if turn%1000 == 0:
+        if turn%5000 == 0:
             print(turn)
         if turn < len(starts):
             num = starts[turn]
