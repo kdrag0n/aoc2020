@@ -20,24 +20,30 @@ other = 0
 while True:
     starts = list(map(int, lines[0].split(",")))
     last_num = -1
-    num_occurs = []
+    num_occurs = {}
     num_turns = {}
-    for turn in range(2020):
+    for turn in range(30000000):
+        if turn%1000 == 0:
+            print(turn)
         if turn < len(starts):
             num = starts[turn]
-        elif num_occurs.count(num) == 1:
+        elif num in num_occurs and num_occurs[num] == 1:
             num = 0
         else:
             last_spk = (num_turns[num][-1] + 1)
             last_last_spk = (num_turns[num][-2] + 1)
             num = last_spk - last_last_spk
         last_num = num
-        num_occurs.append(num)
+        if num in num_occurs:
+            num_occurs[num] += 1
+        else:
+            num_occurs[num] = 1
         if num in num_turns:
             num_turns[num] += [turn]
         else:
             num_turns[num] = [turn]
 
+    print()
     print(num)
     break
 
