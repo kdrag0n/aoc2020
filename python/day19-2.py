@@ -6,7 +6,7 @@ def ints(itr):
     return [int(i) for i in itr]
 
 with open(sys.argv[1], "r") as f:
-    lines = [[l for l in y.split("\n") if l] for y in f.read().split("\n\n") if y]
+    lines = [[l for l in y.split("\n") if l] for y in f.read().replace("8: 42", "8: 42 | 42 8").replace("11: 42 31", "11: 42 31 | 42 11 31").split("\n\n") if y]
 
 
 
@@ -63,6 +63,7 @@ def lmatch(l, rset, i=0):
 def make_re():
     rz = "\n".join(lines[0])
     last_rz = rz
+    iters = 0
     while re.search(r"\d", re.sub(r"^\d+: ", "", rz)):
         print(rz)
         print()
@@ -80,6 +81,9 @@ def make_re():
         if last_rz == rz:
             break
         last_rz = rz
+        iters += 1
+        if iters >= 5:
+            break
     rz = rz.replace('"', '').replace(' ', "")
     print(rz)
     regs = dict(tuple(l.split(":")) for l in rz.split("\n"))
