@@ -31,6 +31,7 @@ while True:
         for alg in algs:
             pos_algs[alg] += [set(ings)]
     alg_commons = set()
+    pos_algs2 = {}
     for alg, ingsets in pos_algs.items():
         s = ingsets[0]
         for s2 in ingsets[1:]:
@@ -38,10 +39,32 @@ while True:
         common = s
         print(alg, common)
         alg_commons.update(common)
+        pos_algs2[alg] = common
     not_algs = all_ings - alg_commons
     print(not_algs)
     for ing in not_algs:
         total += all_ings_list.count(ing)
+    # pass2
+    sure_maps = {}
+    print(pos_algs2)
+    while any(len(s) > 0 for s in pos_algs2.values()):
+        for alg, ingset in pos_algs2.items():
+            if len(ingset) == 1:
+                sure_maps[alg] = [*ingset][0]
+        print('sure-----', sure_maps)
+        for alg, ingset in pos_algs2.items():
+            ingset -= set(sure_maps.values())
+            print(alg, ingset)
+        print()
+        #for alg, ingset in pos_algs2.items():
+        #    newset = ingset
+        #    for alg2, ingset2 in pos_algs2.items():
+        #        if alg2 != alg:
+        #            newset -= ingset2
+        #            print(alg, '::', alg2, ingset2, '->', newset)
+        #    print(alg, newset)
+    alp = sorted(sure_maps.items(), key=lambda t:t[0])
+    print(",".join(v[1] for v in alp))
     break
 
 
