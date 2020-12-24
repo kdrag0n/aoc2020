@@ -18,11 +18,33 @@ result = 0
 other = 0
 
 while True:
+    lcs = {}
+    tiles = []
     for l in lines:
-        l1, l2 = l.split()
-
-        if False:
-            total += 1
+        x = 0
+        y = 0
+        l = l.replace("se", "$").replace("sw", "S").replace("nw", "!").replace("ne", "N")
+        print(l)
+        for inst in list(l):
+            if inst == "e":
+                x += 1
+            elif inst == "$":
+                x += 1
+                y -= 1
+            elif inst == "S":
+                y -= 1
+            elif inst == "w":
+                x -= 1
+            elif inst == "!":
+                y += 1
+                x -= 1
+            elif inst == "N":
+                y += 1
+        tiles.append((x, y))
+    for l in tiles:
+        lcs[l] = tiles.count(l)
+    print(lcs)
+    print(sum(1 for l, v in lcs.items() if v % 2 == 1))
 
     break
 
