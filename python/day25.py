@@ -17,12 +17,32 @@ total = 0
 result = 0
 other = 0
 
-while True:
-    for l in lines:
-        l1, l2 = l.split()
+def trx(n, ls):
+    v = 1
+    for i in range(ls):
+        v *= n
+        v = v % 20201227
+    return v
 
-        if False:
-            total += 1
+while True:
+    ckey, dkey = ints(lines)
+    cls = -1
+    dls = -1
+
+    v = 1
+    for cand in range(1, 10000001):
+        v = (v * 7) % 20201227
+        if cand % 10000 == 0:
+            print(cand)
+        if cls == -1 and v == ckey:
+            print('cls', cand, v)
+            cls = cand
+        elif dls == -1 and v == dkey:
+            print('dls', cand, v)
+            dls = cand
+    print('lss', cls, dls)
+    print(trx(dkey, cls))
+    print(trx(ckey, dls))
 
     break
 
